@@ -8,3 +8,14 @@ before_install:
 ##Ensures the script doesn't wait for user interaction##
 script:
   - docker run tomizrad/docker-react npm run test -- --coverage
+
+##Deploys to AWS##
+deploy:  
+  provider: elasticbeanstalk
+  region: 'us-east-2'  #Region needs to match the AWS region
+  app: 'docker-react'
+  env: 'DockerReact-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-559935335694'
+  bucket_path: 'docker-react'
+  on:
+    branch: master
